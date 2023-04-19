@@ -1,11 +1,16 @@
 //using Serilog;
 
+using MagicVilla.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File("log/villaLogs.txt", rollingInterval: RollingInterval.Hour).CreateLogger(); 
 // Add services to the container.
 //builder.Host.UseSerilog();
-
+builder.Services.AddDbContext<ApplicationDbContext>(option => {
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+    });
 /// <summary>
 /// Bölüm 4 ders 29,30a kurs sonunda bir daha bak. Gelen contentin ve dönen contentin tipini ayarlamak için 30.kursa postman için 29. kursa bak.
 /// </summary>
